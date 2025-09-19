@@ -1,0 +1,49 @@
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="mb-0">Destinos</h2>
+    <a class="btn btn-primary" [routerLink]="['/destinos','nuevo']">Nuevo destino</a>
+  </div>
+
+  <form class="row g-2 mb-3" (ngSubmit)="onSearch()">
+    <div class="col-12 col-md-4">
+      <input class="form-control" placeholder="Buscar por nombre/descr." [(ngModel)]="searchTerm" name="searchTerm" />
+    </div>
+    <div class="col-6 col-md-3">
+      <input type="number" step="0.01" class="form-control" placeholder="Costo mín" [(ngModel)]="minCost" name="minCost" />
+    </div>
+    <div class="col-6 col-md-3">
+      <input type="number" step="0.01" class="form-control" placeholder="Costo máx" [(ngModel)]="maxCost" name="maxCost" />
+    </div>
+    <div class="col-12 col-md-2 d-grid">
+      <button class="btn btn-outline-secondary" type="submit">Filtrar</button>
+    </div>
+  </form>
+
+  <div class="table-responsive">
+    <table class="table table-striped align-middle">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nombre</th>
+          <th>País</th>
+          <th>Descripción</th>
+          <th class="text-end">Costo</th>
+          <th class="text-center">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let d of destinos">
+          <td>{{ d.destinoId }}</td>
+          <td>{{ d.nombre }}</td>
+          <td>{{ d.pais }}</td>
+          <td>{{ d.descripcion }}</td>
+          <td class="text-end">{{ d.costo | currency:'USD':'symbol':'1.2-2' }}</td>
+          <td class="text-center">
+            <a [routerLink]="['/destinos', d.destinoId, 'editar']" class="btn btn-sm btn-warning me-2">Editar</a>
+            <button class="btn btn-sm btn-danger" (click)="onDelete(d)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

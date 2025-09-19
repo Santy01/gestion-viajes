@@ -1,0 +1,25 @@
+<div class="container py-4">
+  <h2 class="mb-3">{{ isEdit ? 'Editar' : 'Nuevo' }} destino</h2>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="row g-3">
+    <div class="col-md-6">
+      <label class="form-label">Nombre</label>
+      <input class="form-control" formControlName="nombre" />
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">País</label>
+      <input class="form-control" formControlName="pais" />
+    </div>
+    <div class="col-12">
+      <label class="form-label">Descripción</label>
+      <textarea rows="3" class="form-control" formControlName="descripcion"></textarea>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Costo</label>
+      <input type="number" step="0.01" class="form-control" formControlName="costo" />
+    </div>
+    <div class="col-12 d-flex gap-2">
+      <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Guardar</button>
+      <a class="btn btn-secondary" [routerLink]="['/destinos']">Cancelar</a>
+    </div>
+  </form>
+</div>

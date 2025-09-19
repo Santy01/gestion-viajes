@@ -1,0 +1,43 @@
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="mb-0">Turistas</h2>
+    <a class="btn btn-primary" [routerLink]="['/turistas','nuevo']">Nuevo turista</a>
+  </div>
+
+  <form class="row g-2 mb-3" (ngSubmit)="onSearch()">
+    <div class="col-12 col-md-6">
+      <input class="form-control" placeholder="Buscar por nombre/apellido/email" [(ngModel)]="searchTerm" name="searchTerm" />
+    </div>
+    <div class="col-12 col-md-2 d-grid">
+      <button class="btn btn-outline-secondary" type="submit">Buscar</button>
+    </div>
+  </form>
+
+  <div class="table-responsive">
+    <table class="table table-striped align-middle">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Email</th>
+          <th>Teléfono</th>
+          <th class="text-center">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let t of turistas">
+          <td>{{ t.turistaId }}</td>
+          <td>{{ t.nombre }}</td>
+          <td>{{ t.apellido }}</td>
+          <td>{{ t.email }}</td>
+          <td>{{ t.telefono }}</td>
+          <td class="text-center">
+            <a [routerLink]="['/turistas', t.turistaId, 'editar']" class="btn btn-sm btn-warning me-2">Editar</a>
+            <button class="btn btn-sm btn-danger" (click)="onDelete(t)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
