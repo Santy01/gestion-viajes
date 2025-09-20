@@ -1,0 +1,64 @@
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Reservas</h2>
+    <a class="btn btn-primary" routerLink="/reservas/nuevo">Nueva reserva</a>
+  </div>
+
+  <div class="card mb-3">
+    <div class="card-body">
+      <div class="row g-2 align-items-end">
+        <div class="col-12 col-md-2">
+          <label class="form-label">Turista ID</label>
+          <input class="form-control" type="number" [(ngModel)]="turistaId" placeholder="e.g. 1" />
+        </div>
+        <div class="col-12 col-md-2">
+          <label class="form-label">Destino ID</label>
+          <input class="form-control" type="number" [(ngModel)]="destinoId" placeholder="e.g. 1" />
+        </div>
+        <div class="col-6 col-md-3">
+          <label class="form-label">Desde</label>
+          <input class="form-control" type="date" [(ngModel)]="desde" />
+        </div>
+        <div class="col-6 col-md-3">
+          <label class="form-label">Hasta</label>
+          <input class="form-control" type="date" [(ngModel)]="hasta" />
+        </div>
+        <div class="col-12 col-md-2 d-grid">
+          <button class="btn btn-outline-secondary" (click)="onFilter()">Filtrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-striped align-middle">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Turista</th>
+          <th>Destino</th>
+          <th>Desde</th>
+          <th>Hasta</th>
+          <th>Personas</th>
+          <th>Total</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let r of reservas">
+          <td>{{ r.reservaId }}</td>
+          <td>{{ r.turistaId }}</td>
+          <td>{{ r.destinoId }}</td>
+          <td>{{ r.fechaInicio }}</td>
+          <td>{{ r.fechaFin }}</td>
+          <td>{{ r.cantidadPersonas }}</td>
+          <td>{{ r.total | currency:'USD':'symbol-narrow' }}</td>
+          <td class="text-end">
+            <a class="btn btn-sm btn-outline-primary me-2" [routerLink]="['/reservas', r.reservaId, 'editar']">Editar</a>
+            <button class="btn btn-sm btn-outline-danger" (click)="onDelete(r)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
